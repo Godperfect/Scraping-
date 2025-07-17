@@ -1,12 +1,13 @@
 {
   "name": "genspark-news-scraper",
   "version": "1.0.0",
-  "description": "Scraper for GenSpark news technology channel",
-  "main": "scraper.js",
+  "description": "Scraper for GenSpark news entertainment channel",
+  "main": "server.js",
   "scripts": {
-    "start": "node scraper.js"
+    "start": "node server.js"
   },
   "dependencies": {
-    "selenium-webdriver": "^4.34.0"
+    "selenium-webdriver": "^4.34.0",
+    "chromedriver": "^123.0.0"
   }
 }
