@@ -1,0 +1,9 @@
+services:
+  - type: worker
+    name: genspark-scraper
+    runtime: node
+    buildCommand: |
+      apt-get update
+      apt-get install -y chromium
+      npm install
+    startCommand: node server.js
