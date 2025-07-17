@@ -1,18 +1,12 @@
 {
   "name": "genspark-news-scraper",
   "version": "1.0.0",
-  "description": "A web scraper that collects technology news articles from GenSpark using Selenium WebDriver.",
-  "main": "index.js",
+  "description": "Scraper for GenSpark news technology channel",
+  "main": "scraper.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node scraper.js"
   },
-  "author": "Your Name",
-  "license": "MIT",
   "dependencies": {
-    "selenium-webdriver": "^4.21.0"
-  },
-  "devDependencies": {},
-  "engines": {
-    "node": ">=14.0.0"
+    "selenium-webdriver": "^4.34.0"
   }
 }
