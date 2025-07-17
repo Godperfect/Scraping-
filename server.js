@@ -1,8 +1,22 @@
-const fs = require('fs');
 const { Builder, By, until } = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
+
+const options = new chrome.Options();
+options.setChromeBinaryPath('/usr/bin/chromium'); // or /opt/render/.cache/... if preinstalled differently
+options.addArguments(
+  '--headless',
+  '--disable-gpu',
+  '--no-sandbox',
+  '--disable-dev-shm-usage',
+  '--disable-setuid-sandbox',
+  '--remote-debugging-port=9222'
+);
 
 (async () => {
-  const driver = await new Builder().forBrowser('chrome').build();
+  const driver = await new Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(options)
+    .build();
 
   try {
     await driver.get("https://www.genspark.ai/news?channel=entertainment");
@@ -44,7 +58,6 @@ const { Builder, By, until } = require('selenium-webdriver');
 
       let audio = '';
       try {
-        // Check if podcast player exists
         const playBtn = await item.findElement(By.css('.podcast-player .play-pause-btn'));
         await playBtn.click();
         await driver.sleep(1500);
@@ -56,12 +69,13 @@ const { Builder, By, until } = require('selenium-webdriver');
       results.push({ title, img, summary, source, time, audio });
     }
 
-    fs.writeFileSync('news.json', JSON.stringify(results, null, 2), 'utf-8');
-    console.log('✅ Saved top 20 news with audio URLs to news.json');
+    // ✅ Log JSON output instead of writing to file
+    console.log('✅ Top 20 News Items:\n', JSON.stringify(results, null, 2));
 
   } catch (e) {
-    console.error('❌ Error:', e);
+    console.error('❌ Error:', e.message);
   } finally {
     await driver.quit();
+    process.exit(0);
   }
 })();
